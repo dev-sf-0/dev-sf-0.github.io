@@ -1,62 +1,41 @@
+---
+layout: default
+title: Home - Dev SF
+---
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dev-SF - Home</title>
-    <style>
-        /* Simple modern styling */
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
-            line-height: 1.6;
-            color: #24292f;
-            background-color: #f6f8fa;
-            margin: 0;
-            padding: 40px 20px;
-        }
-        .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24);
-        }
-        h1 { color: #0969da; border-bottom: 1px solid #d0d7de; padding-bottom: 10px; }
-        h2 { color: #57606a; margin-top: 30px; }
-        ul { padding-left: 20px; }
-        li { margin-bottom: 8px; }
-        footer { margin-top: 40px; font-size: 0.85em; color: #57606a; text-align: center; }
-    </style>
+    <title>{{ page.title }}</title>
+    <link rel="stylesheet" href="{{ '/assets/css/style.css' | relative_url }}">
 </head>
 <body>
 
-    <div class="container">
-        <header>
-            <h1>Welcome to Dev-SF</h1>
-            <p>Independent Game Development & Tech Projects</p>
-        </header>
+    <header>
+        <h1>Welcome to Dev-SF!</h1>
+        <p>This is my custom GitHub Pages site built with Jekyll.</p>
+    </header>
 
-        <main>
-            <section>
-                <h2>About the Project</h2>
-                <p>Ye aik simple, fast aur lightweight static website hai jo direct GitHub Pages par bina kisi Jekyll complex configurations k host ki gayi hai.</p>
-            </section>
+    <main>
+        <section>
+            <h2>About Project</h2>
+            <p>Yahan aap apna content likh sakte hain. Jekyll is file ko automatic aapki theme k layout k sath merge kr k build kr dega.</p>
+        </section>
 
-            <section>
-                <h2>Features</h2>
-                <ul>
-                    <li>No build process needed (Direct HTML/CSS)</li>
-                    <li>Super fast loading speeds</li>
-                    <li>Mobile responsive design</li>
-                </ul>
-            </section>
-        </main>
+        <section>
+            <h2>Latest Updates</h2>
+            <ul>
+                <li>Project initialized successfully.</li>
+                <li>Jekyll configuration fixed.</li>
+            </ul>
+        </section>
+    </main>
 
-        <footer>
-            <p>&copy; 2026 Dev-SF. Hosted with GitHub Pages.</p>
-        </footer>
-    </div>
+    <footer>
+        <p>&copy; {{ site.time | date: '%Y' }} Dev-SF. Powered by GitHub Pages.</p>
+    </footer>
 
 </body>
 </html>
