@@ -1,199 +1,318 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dev SF | Indie Game Developer</title>
-    <!-- Bootstrap 5 CSS CDN -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Bootstrap Icons -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+    <title>Dev SF | Unity Game Developer</title>
+    <!-- Updated Favicon location -->
+    <link rel="icon" type="image/png" href="resources/favicon.png">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        // Critical Script: Runs immediately to prevent theme flashing (FOUC)
+        function applyTheme() {
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        }
+        applyTheme();
+
+        // Tailwind Config with Support for Light & Dark Design Ecosystems
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brandYellow: '#FFEA00', // Core corporate accent identifier
+                        darkBg: '#090d16',      // Deep premium navy space background
+                        cardBg: '#131c2e',      // Lighter variant structural layout cards
+                        lightBg: '#f8fafc',     // Pristine clean slate base background
+                        lightCard: '#ffffff',   // Sharp contrasting elements for daytime readability
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        /* Black and Yellow Dominant Theme */
-        body {
-            background-color: #0b0f17; /* Deep Black */
-            color: #f1f5f9;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        }
-        .navbar {
-            background-color: #121824 !important; /* Dark Charcoal */
-            border-bottom: 2px solid #facc15; /* Yellow Border */
-        }
-        .navbar-brand, .nav-link.active {
-            color: #facc15 !important; /* Yellow */
-        }
-        .nav-link:hover {
-            color: #facc15 !important;
-        }
-        .hero-section {
-            padding: 100px 0;
-            background: linear-gradient(135deg, #121824 0%, #0b0f17 100%);
-        }
-        .text-yellow-custom {
-            color: #facc15; /* Vibrant Yellow */
-        }
-        .card {
-            background-color: #121824;
-            border: 1px solid #1e293b;
-            transition: all 0.3s ease;
-        }
-        .card:hover {
-            transform: translateY(-5px);
-            border-color: #facc15; /* Yellow glow on hover */
-            box-shadow: 0 4px 20px rgba(250, 204, 21, 0.15);
-        }
-        /* Yellow Buttons */
-        .btn-yellow {
-            background-color: #facc15;
-            color: #0b0f17;
-            font-weight: 700;
-            border: 2px solid #facc15;
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-        .btn-yellow:hover {
-            background-color: #eab308;
-            border-color: #eab308;
-            color: #0b0f17;
-        }
-        .btn-outline-yellow {
-            background-color: transparent;
-            color: #facc15;
-            border: 2px solid #facc15;
-            font-weight: 600;
-        }
-        .btn-outline-yellow:hover {
-            background-color: #facc15;
-            color: #0b0f17;
-        }
-        .bg-dark-accent {
-            background-color: #121824 !important;
-        }
-        footer {
-            background-color: #070a0f;
+        .yellow-glow {
+            box-shadow: 0 0 20px rgba(255, 234, 0, 0.06);
         }
     </style>
 </head>
-<body>
+<body class="bg-lightBg text-slate-800 dark:bg-darkBg dark:text-slate-100 font-sans antialiased transition-colors duration-200">
 
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-lg navbar-dark sticky-top">
-        <div class="container">
-            <a class="navbar-brand fw-bold fs-3" href="/">DEV <span class="text-white">SF</span></a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
-                    <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#games">Games</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
-                </ul>
-            </div>
-        </div>
-    </nav>
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-darkBg/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800/60 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo & Name -->
+            <a href="#" class="flex items-center gap-3 group">
+                <img src="resources/favicon.png" alt="Dev SF Logo" class="w-10 h-10 rounded-lg object-cover border border-brandYellow/50 group-hover:scale-105 transition">
+                <span class="text-xl font-black tracking-wider text-slate-900 dark:text-white transition-colors">
+                    DEV <span class="text-slate-950 dark:text-brandYellow bg-brandYellow dark:bg-transparent px-1 rounded sm:p-0">SF</span>
+                </span>
+            </a>
+            
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex space-x-8 text-sm font-semibold tracking-wide text-slate-600 dark:text-slate-400">
+                <a href="#games" class="hover:text-slate-900 dark:hover:text-brandYellow transition">Games</a>
+                <a href="#expertise" class="hover:text-slate-900 dark:hover:text-brandYellow transition">Expertise</a>
+                <a href="#contact" class="hover:text-slate-900 dark:hover:text-brandYellow transition">Contact</a>
+            </nav>
 
-    <!-- Hero Section -->
-    <header class="hero-section text-center text-md-start">
-        <div class="container">
-            <div class="row align-items-center g-5">
-                <div class="col-md-7">
-                    <h1 class="display-4 fw-bold mb-3 text-white">CRAFTING HIGH-OCTANE <span class="text-yellow-custom">GAMING EXPERIENCES</span></h1>
-                    <p class="lead text-secondary mb-4">Welcome to Dev SF. Independent game development focused on high-performance physics, seamless mobile optimization, and engaging gameplay loops.</p>
-                    <a href="#games" class="btn btn-yellow btn-lg px-4 me-2">View My Games</a>
-                    <a href="#contact" class="btn btn-outline-yellow btn-lg px-4">Contact Me</a>
+            <!-- Interface Controller Hub (Theme Dropdown + Action Button) -->
+            <div class="flex items-center gap-4">
+                
+                <!-- Theme Controller Menu -->
+                <div class="relative inline-block text-left">
+                    <button id="themeToggleBtn" type="button" class="p-2.5 rounded-xl bg-slate-100 dark:bg-cardBg border border-slate-200 dark:border-slate-800 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition flex items-center justify-center" aria-haspopup="true">
+                        <i id="themeBtnIcon" class="fa-solid fa-circle-half-stroke text-base"></i>
+                    </button>
+                    
+                    <!-- Dropdown Options Menu Grid Container -->
+                    <div id="themeMenu" class="hidden absolute right-0 mt-2 w-36 rounded-xl bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-800 shadow-xl z-50 overflow-hidden transform opacity-100 scale-100 transition focus:outline-none">
+                        <div class="py-1 text-sm font-medium">
+                            <button onclick="setThemeMode('light')" class="w-full text-left px-4 py-2.5 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/50 flex items-center gap-2">
+                                <i class="fa-solid fa-sun text-amber-500"></i> Light
+                            </button>
+                            <button onclick="setThemeMode('dark')" class="w-full text-left px-4 py-2.5 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/50 flex items-center gap-2">
+                                <i class="fa-solid fa-moon text-indigo-400"></i> Dark
+                            </button>
+                            <button onclick="setThemeMode('system')" class="w-full text-left px-4 py-2.5 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/50 flex items-center gap-2">
+                                <i class="fa-solid fa-desktop text-slate-400"></i> System
+                            </button>
+                        </div>
+                    </div>
                 </div>
-                <div class="col-md-5 text-center">
-                    <i class="bi bi-controller text-yellow-custom" style="font-size: 8rem; filter: drop-shadow(0 0 15px rgba(250, 204, 21, 0.3));"></i>
-                </div>
+
+                <!-- Main Store Action -->
+                <a href="https://play.google.com/store/apps/dev?id=8298459843311955387" target="_blank" class="bg-brandYellow hover:bg-yellow-400 text-slate-950 px-5 py-2.5 rounded-xl text-sm font-bold transition inline-flex items-center gap-2 shadow-lg shadow-brandYellow/10">
+                    <i class="fa-brands fa-google-play text-base"></i> Play Store
+                </a>
             </div>
         </div>
     </header>
 
-    <!-- About / Studio Focus Section -->
-    <section id="about" class="container py-5">
-        <div class="text-center mb-5">
-            <h2 class="fw-bold text-white">DEVELOPMENT <span class="text-yellow-custom">FOCUS</span></h2>
-            <hr class="mx-auto" style="width: 60px; height: 3px; background-color: #facc15; opacity: 1;">
-        </div>
-        <div class="row g-4 text-center">
-            <div class="col-md-4">
-                <div class="p-4 rounded bg-dark-accent h-100 border border-secondary border-opacity-10">
-                    <i class="bi bi-cone-striped text-yellow-custom fs-1 mb-3"></i>
-                    <h4 class="text-white">Vehicle Physics & Mechanics</h4>
-                    <p class="text-secondary">Specialized in handling, gear systems, and advanced suspension physics for realistic and arcade driving dynamics.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="p-4 rounded bg-dark-accent h-100 border border-secondary border-opacity-10">
-                    <i class="bi bi-lightning-charge-fill text-yellow-custom fs-1 mb-3"></i>
-                    <h4 class="text-white">Mobile Optimization</h4>
-                    <p class="text-secondary">Fine-tuning scripts, textures, and draw calls to ensure maximum frame rates on all target devices.</p>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="p-4 rounded bg-dark-accent h-100 border border-secondary border-opacity-10">
-                    <i class="bi bi-shield-check text-yellow-custom fs-1 mb-3"></i>
-                    <h4 class="text-white">Smart Monetization</h4>
-                    <p class="text-secondary">Expert integration of ad networks and mediation layers for stable, non-intrusive revenue stream generation.</p>
-                </div>
+    <!-- Hero Showcase Panel -->
+    <section class="relative min-h-[85vh] flex items-center justify-center overflow-hidden py-20 px-4">
+        <!-- Abstract Dynamic Architecture Grid Lines -->
+        <div class="absolute inset-0 bg-[linear-gradient(to_right,#64748b0a_1px,transparent_1px),linear-gradient(to_bottom,#64748b0a_1px,transparent_1px)] dark:bg-[linear-gradient(to_right,#1f293710_1px,transparent_1px),linear-gradient(to_bottom,#1f293710_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
+        <div class="absolute inset-0 bg-[radial-gradient(circle_at_50%_40%,rgba(255,234,0,0.04),transparent_60%)] dark:bg-[radial-gradient(circle_at_50%_40%,rgba(255,234,0,0.06),transparent_60%)]"></div>
+        
+        <div class="max-w-4xl mx-auto text-center relative z-10">
+            <span class="inline-block px-4 py-1.5 bg-slate-200/50 dark:bg-brandYellow/10 text-slate-800 dark:text-brandYellow rounded-full text-xs font-bold uppercase tracking-widest mb-6 border border-slate-300 dark:border-brandYellow/20 transition-colors">
+                <i class="fa-solid fa-circle text-[8px] mr-1.5 text-green-500 animate-pulse"></i> Solo Indie Game Studio
+            </span>
+            <h1 class="text-4xl sm:text-6xl font-black tracking-tight mb-6 text-slate-900 dark:text-white leading-none transition-colors">
+                High-Performance <br class="hidden sm:block">
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-slate-950 to-slate-700 dark:from-brandYellow dark:to-yellow-400">Unity Mobile Games</span>
+            </h1>
+            <p class="text-base sm:text-lg text-slate-600 dark:text-slate-400 max-w-2xl mx-auto mb-10 leading-relaxed transition-colors">
+                Crafting polished Android experiences with a heavy focus on advanced vehicle physics, stable target frame rates, and seamless ad architectures.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4">
+                <a href="#games" class="bg-slate-900 dark:bg-slate-800 hover:bg-slate-800 dark:hover:bg-slate-700 text-white px-7 py-3.5 rounded-xl font-bold transition tracking-wide shadow-md">
+                    Explore Portfolio
+                </a>
+                <a href="https://play.google.com/store/apps/dev?id=8298459843311955387" target="_blank" class="bg-white dark:bg-transparent hover:bg-slate-100 dark:hover:bg-brandYellow/5 text-slate-800 dark:text-brandYellow border border-slate-300 dark:border-brandYellow/40 px-7 py-3.5 rounded-xl font-bold transition tracking-wide inline-flex items-center justify-center gap-2 shadow-sm">
+                    Google Play Developer Page <i class="fa-solid fa-arrow-up-right-from-square text-xs"></i>
+                </a>
             </div>
         </div>
     </section>
 
-    <!-- Games Section -->
-    <section id="games" class="bg-dark-accent py-5">
-        <div class="container">
-            <div class="text-center mb-5">
-                <h2 class="fw-bold text-white">PROJECTS & <span class="text-yellow-custom">GAMES</span></h2>
-                <hr class="mx-auto" style="width: 60px; height: 3px; background-color: #facc15; opacity: 1;">
-            </div>
-            <div class="row g-4 justify-content-center">
-                <!-- Game Card 1 -->
-                <div class="col-md-6 col-lg-5">
-                    <div class="card h-100 text-white">
-                        <div class="card-body p-4 d-flex flex-column">
-                            <div class="d-flex align-items-center mb-3">
-                                <i class="bi bi-speedometer2 text-yellow-custom fs-2 me-3"></i>
-                                <h4 class="card-title mb-0 fw-bold">Fuel Run: Endless Drive</h4>
-                            </div>
-                            <p class="card-text text-secondary flex-grow-1">An endless driving game built with optimized vehicle physics, intuitive mobile controls, and robust ad-mediation setups for a flawless user journey.</p>
-                            <a href="https://play.google.com/store/apps/details?id=com.devsf.fuelrun" class="btn btn-yellow btn-sm mt-4 w-100">
-                                <i class="bi bi-google-play me-2"></i>Get It On Google Play
-                            </a>
+    <!-- Published Projects Grid -->
+    <section id="games" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-24 border-t border-slate-200 dark:border-slate-900/60 transition-colors">
+        <div class="mb-16 text-center md:text-left">
+            <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white sm:text-4xl transition-colors">Published Releases</h2>
+            <p class="text-slate-600 dark:text-slate-400 mt-2 max-w-xl transition-colors">Optimized indie projects built from scratch and engineered entirely in Unity.</p>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <!-- Game Card: Fuel Run -->
+            <div class="bg-lightCard dark:bg-cardBg rounded-2xl overflow-hidden border border-slate-200 dark:border-slate-800/80 hover:border-brandYellow/40 dark:hover:border-brandYellow/30 transition-all duration-300 flex flex-col group yellow-glow shadow-sm dark:shadow-none">
+                <div class="relative aspect-[16/9] bg-slate-950 overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-t from-white/10 dark:from-cardBg via-transparent to-transparent z-10"></div>
+                    <img src="https://images.unsplash.com/photo-1511919884226-fd3cad34687c?q=80&w=800&auto=format&fit=crop" alt="Fuel Run Banner" class="object-cover w-full h-full group-hover:scale-102 transition duration-500 opacity-90 dark:opacity-80">
+                    <span class="absolute top-4 left-4 z-20 bg-slate-950/85 backdrop-blur-md text-brandYellow border border-brandYellow/30 text-xs font-black px-3 py-1.5 rounded-lg tracking-wider uppercase">
+                        Live on Play Store
+                    </span>
+                </div>
+                <div class="p-8 flex-1 flex flex-col justify-between">
+                    <div>
+                        <h3 class="text-2xl font-black text-slate-900 dark:text-white group-hover:text-brandYellow dark:group-hover:text-brandYellow transition mb-3">Fuel Run: Endless Drive</h3>
+                        <p class="text-slate-600 dark:text-slate-400 text-sm leading-relaxed mb-6 transition-colors">
+                            An intense arcade driving simulator engineered with responsive vehicle physics. Features specialized mobile mechanics, throttle control configurations, procedural endless road loops, and optimized low-draw-call layouts meant for premium mobile fluidity.
+                        </p>
+                        <!-- Tech Badges -->
+                        <div class="flex flex-wrap gap-2 mb-6">
+                            <span class="text-[11px] font-bold px-2.5 py-1 bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-300 rounded-md border border-slate-200 dark:border-slate-800">Unity C#</span>
+                            <span class="text-[11px] font-bold px-2.5 py-1 bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-300 rounded-md border border-slate-200 dark:border-slate-800">Custom Vehicle Physics</span>
+                            <span class="text-[11px] font-bold px-2.5 py-1 bg-slate-100 dark:bg-slate-900 text-slate-600 dark:text-slate-300 rounded-md border border-slate-200 dark:border-slate-800">AdMediation / LevelPlay</span>
                         </div>
+                    </div>
+                    <div class="pt-5 border-t border-slate-200 dark:border-slate-800/60 flex items-center justify-between transition-colors">
+                        <div class="flex items-center gap-1.5 text-xs text-slate-500 dark:text-slate-400 font-medium">
+                            <i class="fa-solid fa-wrench text-slate-700 dark:text-brandYellow"></i> Active Project
+                        </div>
+                        <a href="https://play.google.com/store/apps/details?id=com.devsf.fuelrun" target="_blank" class="text-slate-900 dark:text-brandYellow hover:text-brandYellow dark:hover:text-white font-bold text-sm inline-flex items-center gap-2 group/btn transition-colors">
+                            Download App <i class="fa-solid fa-arrow-right text-xs group-hover/btn:translate-x-1 transition"></i>
+                        </a>
                     </div>
                 </div>
             </div>
+
+            <!-- Future Pipeline Card Placeholder -->
+            <div class="bg-slate-50 dark:bg-cardBg/30 rounded-2xl border-2 border-dashed border-slate-300 dark:border-slate-800 p-8 flex flex-col items-center justify-center text-center group transition-colors">
+                <div class="w-16 h-16 rounded-full bg-white dark:bg-slate-900 flex items-center justify-center border border-slate-200 dark:border-slate-800 mb-4 group-hover:border-slate-400 dark:group-hover:border-brandYellow/30 transition">
+                    <i class="fa-solid fa-plus text-xl text-slate-400 dark:text-slate-500 group-hover:text-slate-600 dark:group-hover:text-brandYellow transition"></i>
+                </div>
+                <h3 class="text-lg font-bold text-slate-500 dark:text-slate-400 transition-colors">Next Project In Pipeline</h3>
+                <p class="text-xs text-slate-400 dark:text-slate-500 max-w-xs mt-1 transition-colors">Prototype mapping stage focusing on low-draw-call mobile physics simulation.</p>
+            </div>
+
         </div>
     </section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="container py-5">
-        <div class="row justify-content-center">
-            <div class="col-md-8 text-center">
-                <h2 class="fw-bold text-white mb-3">LET'S <span class="text-yellow-custom">COLLABORATE</span></h2>
-                <p class="text-secondary mb-4">Have feedback, project inquiries, or want to talk game mechanics? Reach out through the channels below.</p>
-                <div class="d-flex justify-content-center gap-3">
-                    <a href="https://github.com/dev-sf-0" target="_blank" class="btn btn-outline-yellow px-4">
-                        <i class="bi bi-github me-2"></i>GitHub
-                    </a>
-                    <a href="mailto:mail.faisalrehman.345@gmail.com" class="btn btn-yellow px-4">
-                        <i class="bi bi-envelope-fill me-2"></i>Send Email
-                    </a>
+    <!-- Core Technical Architecture Details -->
+    <section id="expertise" class="bg-white/50 dark:bg-slate-900/30 py-24 border-t border-slate-200 dark:border-slate-900 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-12">
+                
+                <div class="lg:col-span-1">
+                    <span class="text-xs font-bold uppercase tracking-widest text-slate-900 dark:text-brandYellow bg-brandYellow dark:bg-transparent px-1.5 py-0.5 rounded sm:p-0">Engine Ecosystem</span>
+                    <h2 class="text-3xl font-extrabold tracking-tight text-slate-900 dark:text-white mt-4 transition-colors">Optimized Core Architecture</h2>
+                    <p class="text-slate-600 dark:text-slate-400 mt-4 leading-relaxed transition-colors">
+                        Writing decoupled, lightweight C# configurations inside Unity to bypass layout overhead and protect mobile hardware thermals during runtime loops.
+                    </p>
                 </div>
+
+                <div class="lg:col-span-2 grid grid-cols-1 sm:grid-cols-2 gap-6">
+                    <!-- Expertise Module 1 -->
+                    <div class="p-6 bg-lightCard dark:bg-cardBg rounded-xl border border-slate-200 dark:border-slate-800/80 shadow-sm dark:shadow-none transition-colors">
+                        <div class="w-10 h-10 rounded-lg bg-slate-900 dark:bg-brandYellow/10 flex items-center justify-center text-brandYellow mb-4">
+                            <i class="fa-solid fa-car text-lg"></i>
+                        </div>
+                        <h4 class="font-bold text-lg text-slate-900 dark:text-white transition-colors">Custom Vehicle Physics</h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 mt-2 leading-relaxed transition-colors">Calculated rigid-body wheel friction limits, transmission curves, and responsive mobile gear shifting structures.</p>
+                    </div>
+
+                    <!-- Expertise Module 2 -->
+                    <div class="p-6 bg-lightCard dark:bg-cardBg rounded-xl border border-slate-200 dark:border-slate-800/80 shadow-sm dark:shadow-none transition-colors">
+                        <div class="w-10 h-10 rounded-lg bg-slate-900 dark:bg-brandYellow/10 flex items-center justify-center text-brandYellow mb-4">
+                            <i class="fa-solid fa-mobile-screen text-lg"></i>
+                        </div>
+                        <h4 class="font-bold text-lg text-slate-900 dark:text-white transition-colors">Mobile Optimization</h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 mt-2 leading-relaxed transition-colors">Aggressive texture atlas structures, performance batching profiling, and object pooling implementations.</p>
+                    </div>
+
+                    <!-- Expertise Module 3 -->
+                    <div class="p-6 bg-lightCard dark:bg-cardBg rounded-xl border border-slate-200 dark:border-slate-800/80 shadow-sm dark:shadow-none transition-colors">
+                        <div class="w-10 h-10 rounded-lg bg-slate-900 dark:bg-brandYellow/10 flex items-center justify-center text-brandYellow mb-4">
+                            <i class="fa-solid fa-rectangle-ad text-lg"></i>
+                        </div>
+                        <h4 class="font-bold text-lg text-slate-900 dark:text-white transition-colors">Mediation Systems</h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 mt-2 leading-relaxed transition-colors">Clean script logic interfacing Google AdMob and LevelPlay SDK packages for uninterrupted network rendering.</p>
+                    </div>
+
+                    <!-- Expertise Module 4 -->
+                    <div class="p-6 bg-lightCard dark:bg-cardBg rounded-xl border border-slate-200 dark:border-slate-800/80 shadow-sm dark:shadow-none transition-colors">
+                        <div class="w-10 h-10 rounded-lg bg-slate-900 dark:bg-brandYellow/10 flex items-center justify-center text-brandYellow mb-4">
+                            <i class="fa-solid fa-code text-lg"></i>
+                        </div>
+                        <h4 class="font-bold text-lg text-slate-900 dark:text-white transition-colors">Pure Unity / C#</h4>
+                        <p class="text-sm text-slate-600 dark:text-slate-400 mt-2 leading-relaxed transition-colors">Solid design principles using performant object models to make codebase scaling highly structured and maintainable.</p>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="text-center py-4 text-secondary border-top border-dark">
-        <div class="container">
-            <p class="mb-0">&copy; 2026 <span class="text-yellow-custom fw-bold">Dev SF</span></p>
+    <!-- Communication Hub & Document Footer -->
+    <footer id="contact" class="border-t border-slate-200 dark:border-slate-900 py-16 bg-white dark:bg-darkBg transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex flex-col md:flex-row justify-between items-center gap-8 pb-12 border-b border-slate-200 dark:border-slate-900 transition-colors">
+                <div class="text-center md:text-left">
+                    <h3 class="text-xl font-bold text-slate-900 dark:text-white transition-colors">Let's connect for inquiries or support</h3>
+                    <p class="text-sm text-slate-600 dark:text-slate-400 mt-1 transition-colors">Open to testing loops, data breakdowns, and architecture collaborations.</p>
+                </div>
+                <div class="flex items-center gap-3">
+                    <a href="mailto:mail.faisalrehman.345@gmail.com" class="px-5 py-3 bg-slate-100 dark:bg-cardBg hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-800 dark:text-slate-200 font-bold text-sm transition border border-slate-200 dark:border-slate-800 flex items-center gap-2 rounded-xl">
+                        <i class="fa-solid fa-envelope text-slate-900 dark:text-brandYellow"></i> Email Support
+                    </a>
+                    <a href="https://github.com/dev-sf-0" target="_blank" class="p-3.5 bg-slate-100 dark:bg-cardBg hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition border border-slate-200 dark:border-slate-800 rounded-xl" title="GitHub Profile">
+                        <i class="fa-brands fa-github text-lg"></i>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="mt-8 flex flex-col md:flex-row justify-between text-xs text-slate-400 dark:text-slate-500 gap-4">
+                <p>&copy; 2026 Dev SF. Handcrafted natively with Tailwind CSS. All platform badges and store assets belong to Google LLC.</p>
+                <div class="space-x-6">
+                    <a href="#" class="hover:text-slate-900 dark:hover:text-brandYellow transition">Privacy Policy</a>
+                    <a href="#" class="hover:text-slate-900 dark:hover:text-brandYellow transition">Terms of Service</a>
+                </div>
+            </div>
         </div>
     </footer>
 
-    <!-- Bootstrap 5 JS Bundle CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core Runtime Theme Logic Engine -->
+    <script>
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        const themeMenu = document.getElementById('themeMenu');
+        const themeBtnIcon = document.getElementById('themeBtnIcon');
+
+        // Toggle UI Options Visibility Configuration
+        themeToggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            themeMenu.classList.toggle('hidden');
+        });
+
+        // Terminate Visibility Overlay on Click-Away Routine
+        document.addEventListener('click', () => {
+            themeMenu.classList.add('hidden');
+        });
+
+        // Update Toggle Icon Visual State
+        function updateToggleIcon(mode) {
+            themeBtnIcon.className = 'fa-solid text-base';
+            if (mode === 'light') {
+                themeBtnIcon.classList.add('fa-sun', 'text-amber-500');
+            } else if (mode === 'dark') {
+                themeBtnIcon.classList.add('fa-moon', 'text-indigo-400');
+            } else {
+                themeBtnIcon.classList.add('fa-circle-half-stroke');
+            }
+        }
+
+        // Active Theme Modifiers Logic
+        function setThemeMode(mode) {
+            if (mode === 'light') {
+                localStorage.theme = 'light';
+            } else if (mode === 'dark') {
+                localStorage.theme = 'dark';
+            } else {
+                localStorage.removeItem('theme');
+            }
+            
+            applyTheme();
+            updateToggleIcon(mode);
+            themeMenu.classList.add('hidden');
+        }
+
+        // On Page Setup Init: Set Active Selection Indicators
+        if (!('theme' in localStorage)) {
+            updateToggleIcon('system');
+        } else {
+            updateToggleIcon(localStorage.theme);
+        }
+    </script>
 </body>
 </html>
