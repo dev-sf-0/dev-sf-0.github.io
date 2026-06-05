@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | Dev SF</title>
+    <!-- Favicon referencing your local resource -->
+    <link rel="icon" type="image/png" href="resources/favicon.png">
+    
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        // Critical Script: Runs immediately to prevent theme flashing (FOUC)
+        function applyTheme() {
+            if (localStorage.theme === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        }
+        applyTheme();
+
+        // Tailwind Config matching your main portfolio layout
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    colors: {
+                        brandYellow: '#FFEA00', 
+                        darkBg: '#090d16',      
+                        cardBg: '#131c2e',      
+                        lightBg: '#f8fafc',     
+                        lightCard: '#ffffff',   
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-lightBg text-slate-800 dark:bg-darkBg dark:text-slate-100 font-sans antialiased transition-colors duration-200">
+
+    <!-- Navbar -->
+    <header class="sticky top-0 z-50 bg-white/80 dark:bg-darkBg/80 backdrop-blur-md border-b border-slate-200 dark:border-slate-800/60 transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <!-- Brand Logo & Name -->
+            <a href="index.html" class="flex items-center gap-3 group">
+                <img src="resources/favicon.png" alt="Dev SF Logo" class="w-10 h-10 rounded-lg object-cover border border-brandYellow/50 group-hover:scale-105 transition">
+                <span class="text-xl font-black tracking-wider text-slate-900 dark:text-white transition-colors">
+                    DEV <span class="text-slate-950 dark:text-brandYellow bg-brandYellow dark:bg-transparent px-1 rounded sm:p-0">SF</span>
+                </span>
+            </a>
+            
+            <!-- Navigation Links -->
+            <nav class="hidden md:flex space-x-8 text-sm font-semibold tracking-wide text-slate-600 dark:text-slate-400">
+                <a href="index.html" class="hover:text-slate-900 dark:hover:text-brandYellow transition">Home</a>
+                <a href="index.html#games" class="hover:text-slate-900 dark:hover:text-brandYellow transition">Games</a>
+                <a href="#policy-content" class="text-brandYellow">Privacy Policy</a>
+            </nav>
+
+            <!-- Interface Controller Hub -->
+            <div class="flex items-center gap-4">
+                
+                <!-- Theme Controller Menu -->
+                <div class="relative inline-block text-left">
+                    <button id="themeToggleBtn" type="button" class="p-2.5 rounded-xl bg-slate-100 dark:bg-cardBg border border-slate-200 dark:border-slate-800 hover:bg-slate-200 dark:hover:bg-slate-800 text-slate-700 dark:text-slate-300 transition flex items-center justify-center">
+                        <i id="themeBtnIcon" class="fa-solid fa-circle-half-stroke text-base"></i>
+                    </button>
+                    
+                    <!-- Dropdown Options Menu -->
+                    <div id="themeMenu" class="hidden absolute right-0 mt-2 w-36 rounded-xl bg-white dark:bg-cardBg border border-slate-200 dark:border-slate-800 shadow-xl z-50 overflow-hidden transform opacity-100 scale-100 transition focus:outline-none">
+                        <div class="py-1 text-sm font-medium">
+                            <button onclick="setThemeMode('light')" class="w-full text-left px-4 py-2.5 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/50 flex items-center gap-2">
+                                <i class="fa-solid fa-sun text-amber-500"></i> Light
+                            </button>
+                            <button onclick="setThemeMode('dark')" class="w-full text-left px-4 py-2.5 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/50 flex items-center gap-2">
+                                <i class="fa-solid fa-moon text-indigo-400"></i> Dark
+                            </button>
+                            <button onclick="setThemeMode('system')" class="w-full text-left px-4 py-2.5 text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800/50 flex items-center gap-2">
+                                <i class="fa-solid fa-desktop text-slate-400"></i> System
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Main Store Action -->
+                <a href="https://play.google.com/store/apps/dev?id=8298459843311955387" target="_blank" class="bg-brandYellow hover:bg-yellow-400 text-slate-950 px-5 py-2.5 rounded-xl text-sm font-bold transition inline-flex items-center gap-2 shadow-lg shadow-brandYellow/10">
+                    <i class="fa-brands fa-google-play text-base"></i> Play Store
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- Page Title Header -->
+    <section class="border-b border-slate-200 dark:border-slate-900 bg-slate-50 dark:bg-slate-900/20 py-12 transition-colors">
+        <div class="max-w-4xl mx-auto px-4 text-center md:text-left">
+            <h1 class="text-3xl sm:text-4xl font-black text-slate-900 dark:text-white">Privacy Policy</h1>
+            <p class="text-sm text-slate-500 dark:text-slate-400 mt-2">Last Updated: April 2026</p>
+        </div>
+    </section>
+
+    <!-- Document Content Container -->
+    <main id="policy-content" class="max-w-4xl mx-auto px-4 py-16">
+        <div class="bg-lightCard dark:bg-cardBg border border-slate-200 dark:border-slate-800/80 rounded-2xl p-6 sm:p-10 shadow-sm dark:shadow-none space-y-8 text-slate-700 dark:text-slate-300 transition-colors leading-relaxed">
+            
+            <!-- Section 1 -->
+            <section class="space-y-3">
+                <h2 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <span class="w-1.5 h-5 bg-brandYellow rounded-full"></span> 1. Introduction
+                </h2>
+                <p>
+                    Welcome to <strong>Dev SF</strong>. This Privacy Policy governs your use of the mobile applications, including <strong>Fuel Run: Endless Drive</strong>, and any related services provided by us. As an indie developer, protecting your shared privacy and tracking footprints remains a major design focus during our implementation cycles.
+                </p>
+                <p>
+                    By downloading or using our mobile games, you agree to the collection and use of information in accordance with this policy ruleset. If you do not consent to these actions, please stop interacting with the running applications natively.
+                </p>
+            </section>
+
+            <!-- Section 2 -->
+            <section class="space-y-3">
+                <h2 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <span class="w-1.5 h-5 bg-brandYellow rounded-full"></span> 2. Information Collection & Use
+                </h2>
+                <p>
+                    For a smoother gameplay interface and optimized mobile rendering stability, our packages require access to specific device properties. The app explicitly integrates standard operational tools that process external metadata handles.
+                </p>
+                <ul class="list-disc pl-6 space-y-2 text-sm">
+                    <li><strong>Log Files & Telemetry:</strong> When unexpected layout execution exceptions occur, device diagnostics, target API level profiles, frame constraints, and operational execution errors are processed strictly to secure core application health.</li>
+                    <li><strong>Device Descriptors:</strong> Data elements such as Advertising ID structures are assessed natively to manage monetization delivery channels seamlessly.</li>
+                </ul>
+            </section>
+
+            <!-- Section 3 -->
+            <section class="space-y-3">
+                <h2 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <span class="w-1.5 h-5 bg-brandYellow rounded-full"></span> 3. Third-Party Integration Frameworks
+                </h2>
+                <p>
+                    The application interfaces with certified external services that record independent structural actions to fulfill operational safety and display ad mediation streams. Below are links directly detailing their unique data validation methodologies:
+                </p>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 pt-2">
+                    <a href="https://policies.google.com/privacy" target="_blank" class="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 text-sm font-semibold text-slate-900 dark:text-slate-200 hover:border-brandYellow/40 transition flex items-center gap-2">
+                        <i class="fa-brands fa-google text-slate-400"></i> Google Play Services
+                    </a>
+                    <a href="https://support.google.com/admob/answer/6128543" target="_blank" class="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 text-sm font-semibold text-slate-900 dark:text-slate-200 hover:border-brandYellow/40 transition flex items-center gap-2">
+                        <i class="fa-solid fa-rectangle-ad text-slate-400"></i> Google AdMob
+                    </a>
+                    <a href="https://knowledge.ironsrc.com/articles/shared/ironsource-mobile-privacy-policy/" target="_blank" class="p-3 bg-slate-50 dark:bg-slate-900 rounded-xl border border-slate-200 dark:border-slate-800 text-sm font-semibold text-slate-900 dark:text-slate-200 hover:border-brandYellow/40 transition flex items-center gap-2">
+                        <i class="fa-solid fa-layer-group text-slate-400"></i> ironSource LevelPlay Mediation
+                    </a>
+                </div>
+            </section>
+
+            <!-- Section 4 -->
+            <section class="space-y-3">
+                <h2 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <span class="w-1.5 h-5 bg-brandYellow rounded-full"></span> 4. Ad Delivery & Cookie Storage
+                </h2>
+                <p>
+                    Cookies or local identifier files are structurally configured inside network calls to flag sequential connection repetitions. These trackable elements are handled explicitly by third-party ad networks to display optimized, non-intrusive promotional panels without breaking game memory buffers.
+                </p>
+            </section>
+
+            <!-- Section 5 -->
+            <section class="space-y-3">
+                <h2 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <span class="w-1.5 h-5 bg-brandYellow rounded-full"></span> 5. Children's Privacy Controls
+                </h2>
+                <p>
+                    Our core mobile games are designed for general audiences and do not intentionally capture information from children under the age of 13. If any data from a child under 13 is found within our systems, it will be deleted immediately. Parents can contact us directly via email to request data removal.
+                </p>
+            </section>
+
+            <!-- Section 6 -->
+            <section class="space-y-3">
+                <h2 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <span class="w-1.5 h-5 bg-brandYellow rounded-full"></span> 6. Security Standards
+                </h2>
+                <p>
+                    We use commercial-grade security practices to safeguard data transfers during network handshakes. However, please remember that no transmission method over the internet or mobile data network is 100% secure, and absolute security cannot be guaranteed.
+                </p>
+            </section>
+
+            <!-- Section 7 -->
+            <section class="space-y-3">
+                <h2 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <span class="w-1.5 h-5 bg-brandYellow rounded-full"></span> 7. Changes to This Policy
+                </h2>
+                <p>
+                    This Privacy Policy may be updated periodically. Any adjustments become active immediately upon being published to this page. You are encouraged to review this documentation from time to time to stay updated on how we handle privacy.
+                </p>
+            </section>
+
+            <!-- Section 8 -->
+            <section class="space-y-3">
+                <h2 class="text-xl font-bold text-slate-900 dark:text-white flex items-center gap-2">
+                    <span class="w-1.5 h-5 bg-brandYellow rounded-full"></span> 8. Contact Information
+                </h2>
+                <p>
+                    If you have questions regarding data retention, structural interface rules, or security loops within our games, you can contact us at our support email address:
+                </p>
+                <p class="pt-1">
+                    <a href="mailto:mail.faisalrehman.345@gmail.com" class="inline-flex items-center gap-2 text-sm font-bold text-slate-900 dark:text-brandYellow hover:underline">
+                        <i class="fa-solid fa-envelope"></i> mail.faisalrehman.345@gmail.com
+                    </a>
+                </p>
+            </section>
+
+        </div>
+    </main>
+
+    <!-- Document Footer -->
+    <footer class="border-t border-slate-200 dark:border-slate-900 py-12 bg-white dark:bg-darkBg transition-colors">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col sm:flex-row justify-between text-xs text-slate-400 dark:text-slate-500 gap-4">
+            <p>&copy; 2026 Dev SF. Handcrafted natively with Tailwind CSS. All platform badges and store assets belong to Google LLC.</p>
+            <div class="space-x-6">
+                <a href="index.html" class="hover:text-slate-900 dark:hover:text-brandYellow transition">Return to Home</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Runtime Theme Engine Script Logic -->
+    <script>
+        const themeToggleBtn = document.getElementById('themeToggleBtn');
+        const themeMenu = document.getElementById('themeMenu');
+        const themeBtnIcon = document.getElementById('themeBtnIcon');
+
+        themeToggleBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            themeMenu.classList.toggle('hidden');
+        });
+
+        document.addEventListener('click', () => {
+            themeMenu.classList.add('hidden');
+        });
+
+        function updateToggleIcon(mode) {
+            themeBtnIcon.className = 'fa-solid text-base';
+            if (mode === 'light') {
+                themeBtnIcon.classList.add('fa-sun', 'text-amber-500');
+            } else if (mode === 'dark') {
+                themeBtnIcon.classList.add('fa-moon', 'text-indigo-400');
+            } else {
+                themeBtnIcon.classList.add('fa-circle-half-stroke');
+            }
+        }
+
+        function setThemeMode(mode) {
+            if (mode === 'light') {
+                localStorage.theme = 'light';
+            } else if (mode === 'dark') {
+                localStorage.theme = 'dark';
+            } else {
+                localStorage.removeItem('theme');
+            }
+            
+            applyTheme();
+            updateToggleIcon(mode);
+            themeMenu.classList.add('hidden');
+        }
+
+        if (!('theme' in localStorage)) {
+            updateToggleIcon('system');
+        } else {
+            updateToggleIcon(localStorage.theme);
+        }
+    </script>
+</body>
+</html>
